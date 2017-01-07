@@ -422,6 +422,9 @@ def search_worker_thread(args, account_queue, account_failures, search_items_que
                 api = FakePogoApi(args.mock)
             else:
                 api = PGoApi()
+                if args.hash_token:
+                    api.activate_hash_server(args.hash_key)
+                    log.info('Created API instance using hash server.')
 
             if status['proxy_url']:
                 log.debug("Using proxy %s", status['proxy_url'])
